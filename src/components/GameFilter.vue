@@ -1,4 +1,19 @@
-export default Vue.component('game-filter', {
+<template>
+  <div>
+    Filter by: <br/>Group:
+    <select @change="changeFilter" v-model="selected">
+      <option value="">All</option>
+      <option>Quest</option>
+      <option>Shooting</option>
+      <option>Strategy</option>
+    </select>
+
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'game-filter',
   data() {
     return {
       filter: { prop: 'type', value: '' },
@@ -14,16 +29,7 @@ export default Vue.component('game-filter', {
       // EVENT BUS USE
       // eventBus.$emit(CHANGED_FILTER, this.filter);
     }
-  },
-  template: `
-<div>
-  Filter by: <br/>Group: <select @change="changeFilter" v-model="selected">
-  <option value="">All</option>
-  <option>Quest</option>
-  <option>Shooting</option>
-  <option>Strategy</option>
-</select>
-
-</div>
-`
-});
+  }
+};
+</script>
+<style></style>

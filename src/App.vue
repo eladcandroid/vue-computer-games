@@ -1,15 +1,28 @@
+<template>
+  <div class="app-container">
+    <game-filter @change-filter="changeFilter($event)"></game-filter><br/>
+    <game-search @change-search="changeSearch($event)"></game-search><br/>
+    <div class="columns is-multiline">
+      <div class="column is-one-quarter" v-for="game in games" :key="game.id">
+        <game @save-game="onSave($event)" :game="game" :key="game.id" @click.native="clickGame(game.id)" :class="{'selected': selectedId === game.id}"></game>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
 import dataService from './services/data.service.js';
 import eventBus, {
   CHANGED_FILTER,
   CHANGED_SEARCH
 } from './services/event-bus.service.js';
 
-import Game from './components/game.component.js';
-import GameFilter from './components/game-filter.component.js';
-import GameSearch from './components/game-search.component.js';
+import Game from './components/Game.vue';
+import GameFilter from './components/GameFilter.vue';
+import GameSearch from './components/GameSearch.vue';
 
-new Vue({
-  el: '#app',
+export default {
+  name: 'app',
   components: {
     game: Game,
     'game-filter': GameFilter,
@@ -30,12 +43,14 @@ new Vue({
   mounted() {
     // dataService.storeData(this.games);
   },
-  data: {
-    selectedGame: 0,
-    selectedId: 0,
-    filter: null,
-    search: null,
-    games: []
+  data() {
+    return {
+      selectedGame: 0,
+      selectedId: 0,
+      filter: null,
+      search: null,
+      games: []
+    };
   },
   methods: {
     clickGame(id) {
@@ -59,16 +74,12 @@ new Vue({
         console.log('games', games);
       });
     }
-  },
-  template: `
-  <div class="app-container">
-    <game-filter @change-filter="changeFilter($event)"></game-filter><br/>
-    <game-search @change-search="changeSearch($event)"></game-search><br/>
-    <div class="columns is-multiline">
-      <div class="column is-one-quarter" v-for="game in games">
-        <game @save-game="onSave($event)" :game="game" :key="game.id" @click.native="clickGame(game.id)" :class="{'selected': selectedId === game.id}"></game>
-      </div>
-    </div>
-    </div>
-  `
-});
+  }
+};
+</script>
+
+<style>
+.app-container {
+  margin: 15px;
+}
+</style>

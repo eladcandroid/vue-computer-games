@@ -11,8 +11,8 @@ export default {
     // for axio
     // return storageService.load(KEY).then(({ data }) => {
     return storageService.load(KEY).then(data => {
-      retData = [...data];
-      if (!retData) {
+      retData = data ? [...data] : [];
+      if (!retData || retData.length === 0) {
         return (retData = this.generateData());
       }
       if (filter && filter.value) {
@@ -46,7 +46,7 @@ export default {
     return storageService.load(KEY).then(data => {
       var itemIdx = data.findIndex(data => data.id === itemId);
       data.splice(itemIdx, 1);
-      return storageService.store(KEY, cars);
+      return storageService.store(KEY, data);
     });
   },
 
@@ -64,6 +64,8 @@ export default {
   },
 
   generateData() {
+    console.log('generateData');
+
     const data = [
       {
         id: 1,
