@@ -42,6 +42,13 @@ export default {
     });
   },
 
+  addItem(item) {
+    return storageService.load(KEY).then(data => {
+      data.push(item);
+      return storageService.store(KEY, data);
+    });
+  },
+
   removeItem(itemId) {
     return storageService.load(KEY).then(data => {
       var itemIdx = data.findIndex(data => data.id === itemId);
