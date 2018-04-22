@@ -1,0 +1,28 @@
+html {
+  overflow-y: auto;
+}
+
+.card + .card {
+  margin-top: 20px;
+}
+
+.card.selected {
+  border: 3px solid black;
+  border-radius: 10px;
+}
+
+.app-container {
+  margin: 15px;
+}
+
+.editIcon {
+  cursor: pointer;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 3.9s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
