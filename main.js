@@ -6,7 +6,6 @@ import eventBus, {
 } from './services/event-bus.service.js';
 
 Vue.component('game-filter', {
-  // props: ['game'],
   data() {
     return {
       filter: { prop: 'type', value: '' },
@@ -36,7 +35,6 @@ Vue.component('game-filter', {
 `
 });
 Vue.component('game-search', {
-  // props: ['game'],
   data() {
     return {
       search: { prop: 'title', value: '' },
