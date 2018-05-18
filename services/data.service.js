@@ -118,5 +118,12 @@ export default {
     this.storeData(data);
 
     return data;
+  },
+  addItem(item) {
+    return storageService.load(KEY).then(data => {
+      const newItem = {...item, id: data.length + 1}
+      data.push(newItem);
+      return storageService.store(KEY, data);
+    });
   }
 };
