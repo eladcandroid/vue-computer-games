@@ -8,11 +8,11 @@ const KEY = 'dataAppKey';
 export default {
   query(filter = null, search = null) {
     let retData = [];
-    // for axio
+    // for axios
     // return storageService.load(KEY).then(({ data }) => {
     return storageService.load(KEY).then(data => {
-      retData = [...data];
-      if (!retData) {
+      retData = data && [...data]
+      if (!retData || retData.length === 0) {
         return (retData = this.generateData());
       }
       if (filter && filter.value) {
